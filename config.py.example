@@ -1,0 +1,28 @@
+# config.py.example
+# 配置文件示例，复制此文件为config.py并填入实际值
+# 此文件可以提交到版本控制，但config.py不可以
+#
+# 使用前请安装依赖:
+# pip install dashscope
+
+# DashScope API Key (从阿里云获取)
+# 获取地址: https://dashscope.console.aliyun.com/
+DASHSCOPE_API_KEY = "your-actual-api-key-here"
+
+# 模型配置
+MODEL_NAME = "qwen-plus"
+
+# API端点URL
+GENERATION_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
+
+# 输出文件名
+OUTPUT_FILENAME = "daily_blockchain_paper.md"
+
+# 定时任务执行时间 (24小时制)
+SCHEDULE_TIME = "09:00"
+
+# ArXiv搜索配置
+ARXIV_CATEGORIES = ['cs.CR', 'cs.DC', 'cs.NI']
+SEARCH_KEYWORDS = ['blockchain', 'smart contract', 'consensus', 'distributed ledger', 'ethereum', 'bitcoin', 'defi']
+MAX_RESULTS_PER_CATEGORY = 50
+DAYS_TO_LOOK_BACK = 30
