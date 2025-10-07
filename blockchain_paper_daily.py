@@ -620,12 +620,12 @@ def main():
         if len(related_papers) >= 50:  # 最多只需要50篇
             break
             
-        print(f"[PROCESS] 正在分析第 {i+1}/{len(candidate_pool)} 篇候选论文: {paper['title'][:50]}...")
+        print(f"[PROCESS] 正在分析第 {i+1}/{len(candidate_pool)} 篇候选论文: {paper['title']}...")
         
         # 首先判断是否与区块链相关
         if is_blockchain_related(paper['title'], paper['summary']):
             related_papers.append(paper)
-            print(f"[SELECT] ✅ 找到相关论文 ({len(related_papers)}/50): {paper['title'][:30]}... 链接: {paper['link']}")
+            print(f"[SELECT] ✅ 找到相关论文 ({len(related_papers)}/50): {paper['title']}... 链接: {paper['link']}")
             
         time.sleep(1)  # 礼貌等待，避免频繁请求
         
@@ -735,6 +735,10 @@ def generate_report_from_arxiv_id(paper_id: str):
     """通过ArXiv ID生成论文日报"""
     print(f"[START] 开始处理论文 ID: {paper_id}")
     
+    # 创建单独的文件夹来保存单篇论文分析结果
+    single_paper_dir = "single_paper_reports"
+    os.makedirs(single_paper_dir, exist_ok=True)
+    
     # 获取论文信息
     paper_info = get_paper_by_id(paper_id)
     if not paper_info:
@@ -783,19 +787,20 @@ def generate_report_from_arxiv_id(paper_id: str):
         if match:
             clean_paper_id = match.group(1)
     
-    output_filename = f"paper_{clean_paper_id}.md"
+    # 保存到单独的文件夹中
+    output_filename = f"{single_paper_dir}/paper_{clean_paper_id}.md"
     with open(output_filename, 'w', encoding='utf-8') as f:
         f.write(final_content)
     
     # 生成小红书风格的内容
     xiaohongshu_content = format_xiaohongshu_output(final_paper_info)
-    xiaohongshu_filename = f"paper_{clean_paper_id}_xiaohongshu.md"
+    xiaohongshu_filename = f"{single_paper_dir}/paper_{clean_paper_id}_xiaohongshu.md"
     with open(xiaohongshu_filename, 'w', encoding='utf-8') as f:
         f.write(xiaohongshu_content)
     
     # 生成小红书封面文字信息
     xiaohongshu_cover = generate_xiaohongshu_cover_text(final_paper_info)
-    xiaohongshu_cover_filename = f"paper_{clean_paper_id}_cover.txt"
+    xiaohongshu_cover_filename = f"{single_paper_dir}/paper_{clean_paper_id}_cover.txt"
     with open(xiaohongshu_cover_filename, 'w', encoding='utf-8') as f:
         f.write(xiaohongshu_cover)
     

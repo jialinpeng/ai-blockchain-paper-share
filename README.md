@@ -63,9 +63,10 @@ export SEARCH_KEYWORDS="blockchain,smart contract,consensus"
 - `xiaohongshu_post.md`: 小红书风格的内容输出
 - `xiaohongshu_cover.txt`: 小红书封面文字信息
 - `arxiv_search_results/`: 包含每日完整搜索结果的文件夹，每个文件以日期命名
+- `single_paper_reports/`: 通过 ArXiv ID 单独分析的论文报告文件夹
 
 注意：`paper_history.md`、`xiaohongshu_post.md` 和 `xiaohongshu_cover.txt` 已添加到 `.gitignore` 中，不会被提交到版本控制系统。
-注意：`arxiv_search_results/` 文件夹已添加到 `.gitignore` 中，其中包含的每日搜索结果文件不会被提交到版本控制系统。
+注意：`arxiv_search_results/` 和 `single_paper_reports/` 文件夹已添加到 `.gitignore` 中，其中包含的文件不会被提交到版本控制系统。
 
 ## 使用方法
 
@@ -89,7 +90,7 @@ python blockchain_paper_daily.py --arxiv-id 2510.03697
 python blockchain_paper_daily.py --arxiv-id http://arxiv.org/abs/2510.03697v1
 ```
 
-这将生成以下文件：
+这将生成以下文件并保存在 `single_paper_reports/` 文件夹中：
 - `paper_2510.03697.md`: 标准格式的论文分析报告
 - `paper_2510.03697_xiaohongshu.md`: 小红书风格的内容输出
 - `paper_2510.03697_cover.txt`: 小红书封面文字信息
